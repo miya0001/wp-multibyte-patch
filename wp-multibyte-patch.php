@@ -4,7 +4,7 @@ Plugin Name: WP Multibyte Patch
 Plugin URI: http://eastcoder.com/code/wp-multibyte-patch/
 Description: Enhances multibyte string I/O functionality of WordPress.
 Author: Kuraishi (tenpura)
-Version: 1.5
+Version: 1.5.1-alpha1
 Author URI: http://eastcoder.com/
 Text Domain: wp-multibyte-patch
 Domain Path: /languages
