@@ -79,6 +79,7 @@ $wpmp_conf['patch_wp_mail'] = true;
 $wpmp_conf['patch_incoming_trackback'] = true;
 $wpmp_conf['patch_incoming_pingback'] = true;
 $wpmp_conf['patch_wp_trim_excerpt'] = true;
+$wpmp_conf['patch_wp_trim_words'] = true;
 $wpmp_conf['patch_get_comment_excerpt'] = true;
 $wpmp_conf['patch_dashboard_recent_drafts'] = true;
 $wpmp_conf['patch_process_search_terms'] = true;

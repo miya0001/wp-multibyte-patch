@@ -3,7 +3,7 @@
  * WP Multibyte Patch Japanese Locale Extension
  *
  * @package WP_Multibyte_Patch
- * @version 1.6.1
+ * @version 1.6.2
  * @author Seisuke Kuraishi <210pura@gmail.com>
  * @copyright Copyright (c) 2012 Seisuke Kuraishi, Tinybit Inc.
  * @license http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -146,6 +146,20 @@ class multibyte_patch_ext extends multibyte_patch {
 		wp_enqueue_style('wpmp-admin-custom');
 	}
 
+	function wp_trim_words($text = '', $num_words = 110, $more = '', $original_text = '') {
+		if('characters' != _x('words', 'word count: words or characters?'))
+			return $text;
+
+		$text = $original_text;
+		$text = wp_strip_all_tags($text);
+		$text = trim(preg_replace("/[\n\r\t ]+/", ' ', $text), ' ');
+
+		if(mb_strlen($text, $this->blog_encoding) > $num_words)
+			$text = mb_substr($text, 0, $num_words, $this->blog_encoding) . $more;
+
+		return $text;
+	}
+
 	function __construct() {
 		// mbstring functions are always required for ja.
 		$this->mbfunctions_required = true;
@@ -156,6 +170,7 @@ class multibyte_patch_ext extends multibyte_patch {
 		$this->conf['patch_process_search_terms'] = true;
 		$this->conf['patch_admin_custom_css'] = true;
 		$this->conf['patch_force_character_count'] = true;
+		$this->conf['patch_wp_trim_words'] = true;
 		// auto, JIS, UTF-8
 		$this->conf['mail_mode'] = 'JIS';
 

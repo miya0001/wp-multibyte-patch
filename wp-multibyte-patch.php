@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Multibyte Patch
 Description: Multibyte functionality enhancement for the WordPress Japanese package.
-Version: 1.6.1
+Version: 1.6.2
 Plugin URI: http://eastcoder.com/code/wp-multibyte-patch/
 Author: Seisuke Kuraishi
 Author URI: http://tinybit.co.jp/
@@ -15,7 +15,7 @@ Domain Path: /languages
  * Multibyte functionality enhancement for the WordPress Japanese package.
  *
  * @package WP_Multibyte_Patch
- * @version 1.6.1
+ * @version 1.6.2
  * @author Seisuke Kuraishi <210pura@gmail.com>
  * @copyright Copyright (c) 2012 Seisuke Kuraishi, Tinybit Inc.
  * @license http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -37,6 +37,7 @@ class multibyte_patch {
 		'patch_incoming_trackback' => false,
 		'patch_incoming_pingback' => false,
 		'patch_wp_trim_excerpt' => true,
+		'patch_wp_trim_words' => false,
 		'patch_get_comment_excerpt' => true,
 		'patch_dashboard_recent_drafts' => true,
 		'patch_process_search_terms' => false,
@@ -366,6 +367,9 @@ class multibyte_patch {
 			add_filter('bp_create_excerpt', array(&$this, 'bp_create_excerpt'), 99);
 			add_filter('bp_get_activity_content_body', array(&$this, 'bp_get_activity_content_body'), 99);
 		}
+
+		if(method_exists($this, 'wp_trim_words') && false !== $this->conf['patch_wp_trim_words'])
+			add_filter('wp_trim_words', array(&$this, 'wp_trim_words'), 99, 4);
 
 		// add action
 		add_action('wp', array(&$this, 'query_based_settings'));
