@@ -59,7 +59,7 @@ class multibyte_patch {
 	var $debug_suffix = '';
 	var $textdomain = 'wp-multibyte-patch';
 	var $lang_dir = 'languages';
-	var $required_version = '3.4-RC2';
+	var $required_version = '3.5';
 	var $query_based_vars = array();
 
 	// For fallback purpose only. (1.6)
