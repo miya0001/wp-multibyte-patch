@@ -303,7 +303,7 @@ var wpLink;
 					return;
 
 				wpLink.lastSearch = search;
-				waiting = t.siblings('img.waiting').show();
+				waiting = t.parent().find('.spinner').show();
 
 				rivers.search.change( search );
 				rivers.search.ajax( function(){ waiting.hide(); });
