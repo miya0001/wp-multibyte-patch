@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Multibyte Patch
 Description: Multibyte functionality enhancement for the WordPress Japanese package.
-Version: 1.6.4
+Version: 1.6.5-alpha1
 Plugin URI: http://eastcoder.com/code/wp-multibyte-patch/
 Author: Seisuke Kuraishi
 Author URI: http://tinybit.co.jp/
@@ -352,6 +352,9 @@ class multibyte_patch {
 		// add filter
 		if(false !== $this->conf['patch_force_character_count'] && 'characters' != _x('words', 'word count: words or characters?'))
 			add_filter('gettext_with_context', array($this, 'force_character_count'), 10, 3);
+
+		if(false !== $this->conf['patch_force_twentytwelve_open_sans_off'] && 'twentytwelve' == get_template())
+			add_action('wp_enqueue_scripts', array($this, 'force_twentytwelve_open_sans_off'), 99);
 	}
 
 	function filters() {
@@ -402,9 +405,6 @@ class multibyte_patch {
 
 		if(false !== $this->conf['patch_dashboard_recent_drafts'])
 			add_action('wp_dashboard_setup', array($this, 'dashboard_recent_drafts'));
-
-		if(false !== $this->conf['patch_force_twentytwelve_open_sans_off'] && 'twentytwelve' == get_template())
-			add_action('wp_enqueue_scripts', array($this, 'force_twentytwelve_open_sans_off'), 99);
 
 		add_action('after_setup_theme', array($this, 'filters_after_setup_theme'), 99);
 	}
